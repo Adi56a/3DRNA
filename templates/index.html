@@ -286,7 +286,7 @@
         .status-value.warning { color: #FF9800; }
         .status-value.error { color: #f44336; }
 
-        /* Performance Tab - Fixed layouts */
+        /* Performance Tab - UPDATED STACKED LAYOUT */
         .perf-tabs {
             display: flex;
             background: rgba(255, 255, 255, 0.2);
@@ -319,6 +319,7 @@
             display: block;
         }
 
+        /* UPDATED: Changed from grid to stacked layout */
         .charts-container {
             max-height: 80vh;
             overflow-y: auto;
@@ -339,11 +340,11 @@
             border-radius: 4px;
         }
 
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* UPDATED: Vertical stacked layout instead of grid */
+        .charts-stack {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
-            margin-bottom: 2rem;
         }
 
         .chart-card {
@@ -352,6 +353,7 @@
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(0, 0, 0, 0.05);
+            width: 100%;
         }
 
         .chart-title {
@@ -359,22 +361,30 @@
             margin-bottom: 1rem;
             color: #2c3e50;
             font-size: 1.1rem;
+            text-align: center;
         }
 
         .chart-container {
-            height: 280px;
+            height: 350px;
             width: 100%;
         }
 
+        /* UPDATED: Remove old grid classes and use stacked layout */
+        .charts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
         .full-width-chart {
-            grid-column: 1 / -1;
+            width: 100%;
         }
 
         .full-width-chart .chart-container {
-            height: 350px;
+            height: 400px;
         }
 
-        /* Graphs Tab - All possible graphs */
+        /* Graphs Tab - UPDATED STACKED LAYOUT */
         .graphs-nav {
             display: flex;
             flex-wrap: wrap;
@@ -695,7 +705,6 @@
             .container { padding: 1rem; }
             .header h1 { font-size: 2rem; }
             .training-grid,
-            .charts-grid,
             .dual-viz-grid,
             .prediction-grid {
                 grid-template-columns: 1fr;
@@ -847,7 +856,7 @@
 
             <div id="overview-perf" class="perf-content active">
                 <div class="charts-container">
-                    <div class="charts-grid">
+                    <div class="charts-stack">
                         <div class="chart-card">
                             <div class="chart-title">📉 Training & Validation Loss</div>
                             <div id="loss-chart" class="chart-container"></div>
@@ -870,7 +879,7 @@
 
             <div id="detailed-perf" class="perf-content">
                 <div class="charts-container">
-                    <div class="charts-grid">
+                    <div class="charts-stack">
                         <div class="chart-card">
                             <div class="chart-title">📊 Performance Box Plots</div>
                             <div id="box-chart" class="chart-container"></div>
@@ -889,7 +898,7 @@
 
             <div id="comparison-perf" class="perf-content">
                 <div class="charts-container">
-                    <div class="charts-grid">
+                    <div class="charts-stack">
                         <div class="chart-card">
                             <div class="chart-title">📋 Classification Report</div>
                             <div id="classification-report" class="chart-container" style="overflow: auto;"></div>
@@ -916,7 +925,7 @@
             </div>
 
             <div id="training-curves-graphs" class="graphs-section active">
-                <div class="charts-grid">
+                <div class="charts-stack">
                     <div class="chart-card">
                         <div class="chart-title">📉 Multi-metric Training</div>
                         <div id="multi-metric-chart" class="chart-container"></div>
@@ -933,7 +942,7 @@
             </div>
 
             <div id="distribution-graphs" class="graphs-section">
-                <div class="charts-grid">
+                <div class="charts-stack">
                     <div class="chart-card">
                         <div class="chart-title">📊 Error Distribution</div>
                         <div id="error-dist-chart" class="chart-container"></div>
@@ -950,7 +959,7 @@
             </div>
 
             <div id="correlation-graphs" class="graphs-section">
-                <div class="charts-grid">
+                <div class="charts-stack">
                     <div class="chart-card">
                         <div class="chart-title">🔗 Metric Correlations</div>
                         <div id="correlation-matrix" class="chart-container"></div>
@@ -967,7 +976,7 @@
             </div>
 
             <div id="advanced-graphs" class="graphs-section">
-                <div class="charts-grid">
+                <div class="charts-stack">
                     <div class="chart-card">
                         <div class="chart-title">🌡️ Training Dynamics</div>
                         <div id="dynamics-chart" class="chart-container"></div>
@@ -984,7 +993,7 @@
             </div>
 
             <div id="3d-analysis-graphs" class="graphs-section">
-                <div class="charts-grid">
+                <div class="charts-stack">
                     <div class="chart-card">
                         <div class="chart-title">🧬 Structure Quality</div>
                         <div id="quality-chart" class="chart-container"></div>
@@ -1791,9 +1800,6 @@ Example: AUGCUGAUCGACUGAUC"></textarea>
             }, 4000);
         }
 
-        // Continue with performance data loading and graph creation...
-        // (I'll include the rest in the next part due to length constraints)
-        
         // Performance data loading and chart creation
         async function loadPerformanceData() {
             try {
